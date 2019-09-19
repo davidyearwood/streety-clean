@@ -2,8 +2,11 @@
 <html>
   <head></head>
   <body>
-    <input type="text" id="search">
-    
-    <script src="src/index.js" type="module"></script>
+    <div id="app"></div>
+    <script type="module">
+      import SearchController from './src/controller/SearchController.js';
+      
+      let sc = new SearchController({ container: document.getElementById('app')})
+    </script>
   </body>
 </html>
