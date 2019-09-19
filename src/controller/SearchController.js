@@ -1,5 +1,6 @@
 import getStreetSweepingSchedule from '../utils/getStreetSweepingSchedule.js';
 import handleSweepScheduleError from '../utils/handleSweepScheduleError.js';
+import removeAllChildren from '../utils/removeAllChildren.js';
 import AutoComplete from '../components/AutoComplete/AutoComplete.js';
 import AutoCompleteList from '../components/AutoComplete/AutoCompleteList.js';
 import SearchField from '../components/SearchField.js';
@@ -44,10 +45,4 @@ export default class SearchController {
       })
       .catch(handleSweepScheduleError);
   }
-}
-
-function removeAllChildren(element) {
-  let { children } = element;
-  element.innerHTML = '';
-  return children;
 }
