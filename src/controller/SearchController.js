@@ -1,10 +1,10 @@
-import getStreetSweepingSchedule from './getStreetSweepingSchedule.js';
-import handleSweepScheduleError from './handleSweepScheduleError.js';
-import AutocompleteList from './components/autocompleteList.js';
-import SearchField from './components/SearchField.js';
-import { debounce } from './utils/throttle-debounce.js';
+import getStreetSweepingSchedule from '../utils/getStreetSweepingSchedule.js';
+import handleSweepScheduleError from '../utils/handleSweepScheduleError.js';
+import AutocompleteList from '../components/autocompleteList.js';
+import SearchField from '../components/SearchField.js';
+import { debounce } from '../utils/throttle-debounce.js';
 
-class SearchController {
+export default class SearchController {
   constructor(config) {
     this.container = config.container;
     this.searchField = SearchField();
@@ -20,6 +20,7 @@ class SearchController {
     let query = e.target.value;
     getStreetSweepingSchedule(`$q=${query}`)
       .then(schedule => {
+        console.log('sent request');
         if (schedule.error) {
           throw schedule;
         } else {
