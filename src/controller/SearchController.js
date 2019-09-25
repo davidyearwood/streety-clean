@@ -5,6 +5,7 @@ import AutoComplete from '../components/AutoComplete/AutoComplete.js';
 import AutoCompleteList from '../components/AutoComplete/AutoCompleteList.js';
 import SearchField from '../components/SearchField.js';
 import { debounce } from '../utils/throttle-debounce.js';
+import isInRange from '../utils/isInRange.js';
 
 export default class SearchController {
   constructor(config) {
@@ -21,13 +22,22 @@ export default class SearchController {
 
   handleInput(e) {
     let query = e.target.value;
-    console.log(query);
+
+    if (!isInRange(query, 1, 50) || isNaN(parseInt(query, 10))) {
+      this.searchField.classList.add('error');
+      return null;
+    }
+
+    if (this.searchField.classList.contains('error')) {
+      this.searchField.classList.remove('error');
+    }
+
     if (!query || !query.trim()) {
       removeAllChildren(this.autocomplete);
       return null;
     }
 
-    getStreetSweepingSchedule(`$q=${query}`)
+    getStreetSweepingSchedule(`ward=${query}`)
       .then(schedule => {
         if (schedule.error) {
           throw schedule;
